@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Trim.</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Token Trim</h1>
+    <p>Compress and bundle code files into a single AI-ready context file. Strips comments, collapses indentation, removes noise.</p>
+  </header>
+
+  <!-- Drop zone -->
+  <div class="card">
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" multiple>
+      <div class="drop-icon">&#128193;</div>
+      <div class="drop-title">Drop files here or browse</div>
+      <div class="drop-sub">Any language &middot; Multiple files supported</div>
+    </div>
+    <div class="file-list" id="fileList"></div>
+  </div>
+
+  <!-- Options -->
+  <div class="card hidden" id="optsCard">
+    <div class="section-label">Compression</div>
+    <div class="opts-grid">
+      <label class="opt-row">
+        <input type="checkbox" id="oComments" checked>
+        <div>
+          <div class="opt-title">Strip comments</div>
+          <div class="opt-desc">Removes //, #, /* */, docstrings. Biggest token win.</div>
+        </div>
+      </label>
+      <label class="opt-row">
+        <input type="checkbox" id="oBlanks" checked>
+        <div>
+          <div class="opt-title">Remove blank lines</div>
+          <div class="opt-desc">Eliminates all empty or whitespace-only lines.</div>
+        </div>
+      </label>
+      <label class="opt-row">
+        <input type="checkbox" id="oIndent" checked>
+        <div>
+          <div class="opt-title">Minimize indentation</div>
+          <div class="opt-desc">4-space / tab → 1 space per level. Python-safe.</div>
+        </div>
+      </label>
+      <label class="opt-row">
+        <input type="checkbox" id="oTrail" checked>
+        <div>
+          <div class="opt-title">Strip trailing whitespace</div>
+          <div class="opt-desc">Trims invisible characters from line endings.</div>
+        </div>
+      </label>
+      <label class="opt-row">
+        <input type="checkbox" id="oTree" checked>
+        <div>
+          <div class="opt-title">Include file tree</div>
+          <div class="opt-desc">Adds a directory overview at the top of the output.</div>
+        </div>
+      </label>
+    </div>
+
+    <hr>
+    <button class="btn-primary" id="genBtn" disabled>Pack &amp; compress</button>
+  </div>
+
+  <!-- Stats -->
+  <div class="card hidden" id="statsCard">
+    <div class="section-label">Token savings</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val" id="sBefore">—</div>
+        <div class="stat-lbl">tokens before</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val green" id="sAfter">—</div>
+        <div class="stat-lbl">tokens after</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val green" id="sSaved">—</div>
+        <div class="stat-lbl">tokens saved</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Output -->
+  <div class="card hidden" id="outCard">
+    <div class="out-header">
+      <span class="out-meta" id="outMeta"></span>
+      <div class="out-actions">
+        <button class="btn-small" id="downloadBtn">Download .txt</button>
+        <button class="btn-small" id="copyBtn">Copy</button>
+      </div>
+    </div>
+    <div class="out-box" id="outBox"></div>
+  </div>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
